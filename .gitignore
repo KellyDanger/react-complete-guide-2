@@ -3,7 +3,6 @@
 # dependencies
 /package.json
 /package-lock.json
-.gitignore
 .eslintcache
 /node_modules
 /.pnp
