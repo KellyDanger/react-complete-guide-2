@@ -1,12 +1,21 @@
 import './ExpenseForm.css';
+import { useState } from 'react';
 
 const ExpenseForm = () => {
+    const [newTitle, setNewTitle] = useState('');
+
+    const titleChangeHandler = (event) => {
+        setNewTitle(event.target.value);
+    }
+
+    // KELLY FOR FRIDAY....ADD HANDLERS/LISTENERS/STATE FOR THE OTHER INPUTS
+
     return (
     <form>
         <div className='new-expense__controls'>
             <div className='new-expense__control'>
                 <label>Title</label>
-                <input type="text"/>
+                <input type="text" onChange={titleChangeHandler}/>
             </div>
             <div className='new-expense__control'>
                 <label>Date</label>
