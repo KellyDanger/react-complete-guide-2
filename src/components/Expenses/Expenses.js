@@ -5,14 +5,37 @@ import ExpensesFilter from "../ExpensesFilter/ExpensesFilter.js";
 import { useState, useEffect } from "react";
 
 function Expenses(props) {
-  const [filterYear, setFilterYear] = useState("select");
+  const [filterYear, setFilterYear] = useState("all");
 
-  // const items = props.items;
   const filteredExpenses = props.items.filter(
     (item) => item.date.getFullYear() === Number(filterYear)
   );
-
-  const allExpenses = props.items;
+// DEFAULT MESSAGE IF NO EXPENSES EXIST FOR THE SELECTED YEAR
+ let expensesContent = <p>You Have No Expenses</p>;
+// RENDER ONLY THE EXPENSES FOR THE SELECTED YEAR
+ if(filteredExpenses.length > 0) {
+   expensesContent = filteredExpenses.map((filteredItem) => (
+    <ExpenseItem
+      key={filteredItem.id}
+      id={filteredItem.id}
+      title={filteredItem.title}
+      amount={filteredItem.amount}
+      date={filteredItem.date}
+    />
+  ))
+ };
+// RENDER ALL EXPENSES IF NO YEAR IS SELECTED
+ if(filterYear === 'all'){
+  expensesContent = props.items.map((item) => (
+    <ExpenseItem
+      key={item.id}
+      id={item.id}
+      title={item.title}
+      amount={item.amount}
+      date={item.date}
+    />
+  ))
+ };
 
   const filterChangeHandler = (selectedYear) => {
     setFilterYear(selectedYear); //TWO WAY BINDING
@@ -29,31 +52,7 @@ function Expenses(props) {
           selected={filterYear}
           onFilterChange={filterChangeHandler}
         />
-        {/* RENDER ALL EXPENSES IF NO YEAR IS SELECTED */}
-        {filterYear === "select"
-          && allExpenses.map((item) => (
-              <ExpenseItem
-                key={item.id}
-                id={item.id}
-                title={item.title}
-                amount={item.amount}
-                date={item.date}
-              />
-            ))
-          }
-          {/* RENDER A MESSAGE IF NO EXPENSES EXIST IN THE FILTERED YEAR */}
-          {filteredExpenses.length === 0 && <p>You Have No Expenses</p>}
-          {/* RENDER EXPENSES FOR THE CHOSEN YEAR */}
-          {filteredExpenses.length > 0 &&
-            filteredExpenses.map((filteredItem) => (
-              <ExpenseItem
-                key={filteredItem.id}
-                id={filteredItem.id}
-                title={filteredItem.title}
-                amount={filteredItem.amount}
-                date={filteredItem.date}
-              />
-            ))}
+        {expensesContent} 
       </Card>
     </>
   );
