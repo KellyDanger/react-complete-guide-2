@@ -1,7 +1,9 @@
 import './ExpensesFilter.css';
+import Chart from '../Chart/Chart.js';
 
 const ExpensesFilter = (props) => {
-    
+    const dataPoints = {};
+
     const dropdownChangeHandler = (event) => {
         props.onFilterChange(event.target.value);
     }
@@ -9,6 +11,7 @@ const ExpensesFilter = (props) => {
   return (
     <div className='expenses-filter'>
       <div className='expenses-filter__control'>
+        <Chart dataPoints={dataPoints}/>
         <label>Filter by year</label>
         <select value={props.selected} onChange={dropdownChangeHandler}>
           <option value='all'>All Years</option>  
