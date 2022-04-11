@@ -33,9 +33,10 @@ function App() {
     console.log('In App JS');
     console.log(expense);
   }
+
   return (
     <>
-      <NewExpense onAddExpense={addExpenseHandler}/>    
+      <NewExpense onAddExpense={addExpenseHandler}/> 
       <Expenses items={expenses}/>
     </>
   );
