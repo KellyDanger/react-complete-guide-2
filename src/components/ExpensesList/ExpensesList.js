@@ -7,42 +7,78 @@ const ExpensesList = (props) => {
   const filterYear = props.filterYear;
 
   let expensesContent;
-  
-  // RENDER ALL EXPENSES IF NO YEAR IS SELECTED
-  if (filterYear === "all") {
-    expensesContent = items.map((item) => (
-      <ExpenseItem
-        key={item.id}
-        id={item.id}
-        title={item.title}
-        amount={item.amount}
-        date={item.date}
-      />
-    ));
-  };
-  // DEFAULT MESSAGE IF NO EXPENSES EXIST FOR THE SELECTED YEAR
-  if (filteredExpenses.length === 0) {
-    expensesContent = <h2 className="expenses-list__fallback">You Have No Expenses for This Year</h2>
-  };
 
-  // RENDER ONLY THE EXPENSES FOR THE SELECTED YEAR
-  if (filteredExpenses.length > 0) {
-    expensesContent = filteredExpenses.map((filteredItem) => (
-      <ExpenseItem
-        key={filteredItem.id}
-        id={filteredItem.id}
-        title={filteredItem.title}
-        amount={filteredItem.amount}
-        date={filteredItem.date}
-      />
-    ));
-  };
+//   switch (filterYear) {
+// // IF THE "ALL YEARS" OPTION IS SELECTED, RENDER ALL ITEMS
+//     case "all":
+//       expensesContent = items.map((item) => (
+//         <ExpenseItem
+//           key={item.id}
+//           id={item.id}
+//           title={item.title}
+//           amount={item.amount}
+//           date={item.date}
+//         />
+//       ));
+//       break;
+// // IF A YEAR IS SELECTED, THEN FOLLOW THIS NESTED SWITCH STATEMENT
+//     default:
+//       switch (filteredExpenses.length) {
+//         case 0:
+//           expensesContent = (
+//             <h2 className='expenses-list__fallback'>
+//               You Have No Expenses for This Year
+//             </h2>
+//           );
+//           break;
+//         default:
+//           expensesContent = filteredExpenses.map((filteredItem) => (
+//             <ExpenseItem
+//               key={filteredItem.id}
+//               id={filteredItem.id}
+//               title={filteredItem.title}
+//               amount={filteredItem.amount}
+//               date={filteredItem.date}
+//             />
+//           ));
+//       }
+//   }
 
-  return (
-    <ul className="expenses-list">
-      {expensesContent}
-    </ul>
-  );
+switch (true) {
+    // IF THE "ALL YEARS" OPTION IS SELECTED, RENDER ALL ITEMS
+        case (filterYear === 'all'):
+          expensesContent = items.map((item) => (
+            <ExpenseItem
+              key={item.id}
+              id={item.id}
+              title={item.title}
+              amount={item.amount}
+              date={item.date}
+            />
+          ));
+          break;
+    // IF A YEAR IS SELECTED, THEN FOLLOW THIS NESTED SWITCH STATEMENT
+            case (filteredExpenses.length === 0):
+              expensesContent = (
+                <h2 className='expenses-list__fallback'>
+                  You Have No Expenses for This Year
+                </h2>
+              );
+              break;
+            default:
+              expensesContent = filteredExpenses.map((filteredItem) => (
+                <ExpenseItem
+                  key={filteredItem.id}
+                  id={filteredItem.id}
+                  title={filteredItem.title}
+                  amount={filteredItem.amount}
+                  date={filteredItem.date}
+                />
+              ));
+          }
+      
+
+  return <ul className='expenses-list'>{expensesContent}</ul>;
 };
 
 export default ExpensesList;
