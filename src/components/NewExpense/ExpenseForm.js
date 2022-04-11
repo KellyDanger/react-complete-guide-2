@@ -28,7 +28,7 @@ const ExpenseForm = (props) => {
       date: new Date(newDate + "T00:00:00"),
     };
     props.onSaveExpenseData(expenseData);
-    console.log(newDate);
+    props.toggleForm();
     setNewAmount("");
     setNewTitle("");
     setNewDate(""); //THIS IN CONJUNCTION WITH....**
@@ -63,6 +63,7 @@ const ExpenseForm = (props) => {
         </div>
       </div>
       <div className='new-expense__actions'>
+        <button type='button' onClick={props.toggleForm}>Cancel</button>
         <button type='submit'>Add Expense</button>
       </div>
     </form>
