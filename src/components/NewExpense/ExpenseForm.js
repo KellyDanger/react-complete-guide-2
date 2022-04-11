@@ -36,10 +36,10 @@ const ExpenseForm = (props) => {
         const expenseData ={
             title: newTitle,
             amount: newAmount,
-            date: new Date(newDate)
+            date: new Date(newDate + 'T00:00:00')
         };
         props.onSaveExpenseData(expenseData);
-        console.log(expenseData);
+        console.log(newDate);
         setNewAmount('');
         setNewTitle('');
         setNewDate('');//THIS IN CONJUNCTION WITH....**

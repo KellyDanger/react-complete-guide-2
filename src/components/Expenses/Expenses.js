@@ -6,13 +6,12 @@ import { useState, useEffect } from 'react';
 
 
 function Expenses(props) {
-  const [filterYear, setFilterYear] = useState('2020');  
+  const [filterYear, setFilterYear] = useState('select');  
   
-  const items = props.items;
+  // const items = props.items;
 
   const filterChangeHandler = (selectedYear) => {
     setFilterYear(selectedYear)//TWO WAY BINDING
-    console.log(selectedYear);
   }
 // LOGS THE VALUE OF FILTER YEAR ON CHANGE OR RELOAD OF COMPONENT
   useEffect(() => {
@@ -23,17 +22,33 @@ function Expenses(props) {
     <>
       <Card className='expenses'>
         <ExpensesFilter selected={filterYear} onFilterChange={filterChangeHandler}/>  
-        {items.map((item) => {
-          return ( 
-            <ExpenseItem
-              key={item.id}
-              id={item.id}
-              title={item.title}
-              amount={item.amount}
-              date={item.date}
-            />
-          )
-        })}
+        {props.items.map((item) => {
+          let itemYear = item.date.getFullYear();
+          if (Number(filterYear) === itemYear){
+            return ( 
+              <ExpenseItem
+                key={item.id}
+                id={item.id}
+                title={item.title}
+                amount={item.amount}
+                date={item.date}
+              />
+            )
+          }
+          if(filterYear === 'select'){
+              return ( 
+                <ExpenseItem
+                  key={item.id}
+                  id={item.id}
+                  title={item.title}
+                  amount={item.amount}
+                  date={item.date}
+                />
+            )
+          }
+          else
+            return null;
+        })};
       </Card>
     </>
   );
