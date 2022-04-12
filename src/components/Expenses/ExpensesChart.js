@@ -18,8 +18,6 @@ const ExpensesChart = (props) => {
     ]
 
     for(let expense of props.expenses) {
-        console.log(expense.date)
-        console.log("inLIST")
         const expenseMonth = expense.date.getMonth(); //starting at 0 for January, because the array above has indexes that match the date values
         chartDatapoints[expenseMonth].value += expense.amount;
     }

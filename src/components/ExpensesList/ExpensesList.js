@@ -9,17 +9,6 @@ const ExpensesList = (props) => {
   let expensesContent;
 
   switch (true) {
-    // case filterYear === "all":
-    //   expensesContent = items.map((item) => (
-    //     <ExpenseItem
-    //       key={item.id}
-    //       id={item.id}
-    //       title={item.title}
-    //       amount={item.amount}
-    //       date={item.date}
-    //     />
-    //   ));
-    //   break;
     case filteredExpenses.length === 0:
       expensesContent = (
         <h2 className='expenses-list__fallback'>
